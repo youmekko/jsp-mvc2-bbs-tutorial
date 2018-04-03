@@ -1,2 +1,2 @@
-/WebContent/WEB-INF/lib
-/src/com/javalec/ex/dbconnector
+*.jar
+/src/com/javalec/ex/dbconnector/DBConnection.java
