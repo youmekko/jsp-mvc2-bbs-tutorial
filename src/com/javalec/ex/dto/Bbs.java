@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Bbs {
 
 	int bbsId, bbsHit, bbsGroup, bbsStep, bbsIndent;
-	String bbsName, bbsContent;
+	String bbsName, bbsContent, bbsTitle;
 	Timestamp bbsDate;
 
 	public Bbs(int bbsId, String bbsName, String bbsTitle, String bbsContent, Timestamp bbsDate, int bbsHit,
@@ -19,6 +19,7 @@ public class Bbs {
 		this.bbsName = bbsName;
 		this.bbsDate = bbsDate;
 		this.bbsContent = bbsContent;
+		this.bbsTitle = bbsTitle;
 	}
 
 	public int getBbsId() {
@@ -83,6 +84,14 @@ public class Bbs {
 
 	public void setBbsContent(String bbsContent) {
 		this.bbsContent = bbsContent;
+	}
+	
+	public String getBbsTitle() {
+		return bbsTitle;
+	}
+
+	public void setBbsTitle(String bbsTitle) {
+		this.bbsTitle = bbsTitle;
 	}
 
 }

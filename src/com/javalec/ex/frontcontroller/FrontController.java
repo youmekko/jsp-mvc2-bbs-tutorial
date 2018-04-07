@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javalec.ex.command.BbsCommand;
-import com.javalec.ex.command.BbsListCommand;
-import com.javalec.ex.command.BbsWriteCommand;
+import com.javalec.ex.command.*;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -75,10 +73,30 @@ public class FrontController extends HttpServlet {
 			bbsCommand.execute(request, response);
 			viewPage = "list.jsp";
 
-		} else if (command.equals("write.do")) {
-			// bbsCommand = new bbsContentCommand();
+		} else if (command.equals("/content_view.do")) {
+			bbsCommand = new BbsContentCommand();
 			bbsCommand.execute(request, response);
 			viewPage = "content_view.jsp";
+
+		} else if (command.equals("/modify.do")) {
+			bbsCommand = new BbsModifyCommand();
+			bbsCommand.execute(request, response);
+			viewPage = "list.do";
+
+		} else if (command.equals("/delte.do")) {
+			bbsCommand = new BbsDeleteCommand();
+			bbsCommand.execute(request, response);
+			viewPage = "list.do";
+
+		} else if (command.equals("/reply_view.do")) {
+			bbsCommand = new BbsReplyViewCommand();
+			bbsCommand.execute(request, response);
+			viewPage = "reply_view.jsp";
+
+		} else if (command.equals("/reply.do")) {
+			bbsCommand = new BbsReplyCommand();
+			bbsCommand.execute(request, response);
+			viewPage = "list.do";
 		}
 
 		// request -> response 단계에서 forward와 sendRedirect 방식이 있다.
