@@ -61,16 +61,19 @@ public class FrontController extends HttpServlet {
 		String command = uri.substring(conPath.length());
 
 		if (command.equals("/write_view.do")) {
+			System.out.println("go write_view.jsp");
 			viewPage = "write_view.jsp";
 
 		} else if (command.equals("/write.do")) {
 			bbsCommand = new BbsWriteCommand();
 			bbsCommand.execute(request, response);
+			System.out.println("go list.do");
 			viewPage = "list.do";
 
 		} else if (command.equals("/list.do")) {
 			bbsCommand = new BbsListCommand();
 			bbsCommand.execute(request, response);
+			System.out.println("go list.jsp");
 			viewPage = "list.jsp";
 
 		} else if (command.equals("/content_view.do")) {
