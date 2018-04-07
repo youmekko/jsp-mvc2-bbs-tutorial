@@ -23,40 +23,54 @@
 <body>
 
 	<div class="container">
-		<form action="reply.do" method="post">
-			<table style="width=500; cellpadding=0; cellspacing=0; border=1;">
-				<input type="hidden" name="bbsId" value="${reply_view.bId}">
-				<input type="hidden" name="bbbsGroup" value="${reply_view.bGroup}">
-				<input type="hidden" name="bbsStep" value="${reply_view.bStep}">
-				<input type="hidden" name="bbsIndent" value="${reply_view.bIndent}">
-				<tr>
-					<td>Id</td>
-					<td>${reply_view.bbsId}</td>
-				</tr>
-				<tr>
-					<td>HIT</td>
-					<td>${reply_view.bbsHit}</td>
-				</tr>
-				<tr>
-					<td>NAME</td>
-					<td><input type="text" name="bbsName"
-						value="${reply_view.bbsName}"></td>
-				</tr>
-				<tr>
-					<td>Title</td>
-					<td><input type="text" name="bbsTitle"
-						value="${reply_view.bbsTitle}"></td>
-				</tr>
-				<tr>
-					<td>CONTENT</td>
-					<td><textarea rows="10" name="bContent">${reply_view.bbsContent}</textarea></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="submit"> <a
-						href="list.do">목록</a></td>
-				</tr>
-			</table>
-		</form>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">MVC MODEL2 BBS</div>
+			<div class="panel-body">
+
+
+				<form action="reply.do" method="post">
+					<input type="hidden" name="bbsId" value="${reply_view.bbsId}">
+					<input type="hidden" name="bbbsGroup"
+						value="${reply_view.bbsGroup}"> <input type="hidden"
+						name="bbsStep" value="${reply_view.bbsStep}"> <input
+						type="hidden" name="bbsIndent" value="${reply_view.bbsIndent}">
+					<table class="table table-condensed">
+						<tr>
+							<td>번호</td>
+							<td>${reply_view.bbsId}</td>
+						</tr>
+						<tr>
+							<td>조회수</td>
+							<td>${reply_view.bbsHit}</td>
+						</tr>
+						<tr>
+							<td>이름</td>
+							<td><input type="text" name="bbsName"
+								value="${reply_view.bbsName}"></td>
+						</tr>
+						<tr>
+							<td>제목</td>
+							<td><input type="text" name="bbsTitle"
+								value="${reply_view.bbsTitle}"></td>
+						</tr>
+						<tr>
+							<td>내용</td>
+							<td><textarea rows="10" name="bContent">${reply_view.bbsContent}</textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2"><button type="submit"
+									class="btn btn-success">댓글</button></td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td><a href="list.do"><button class="btn btn-primary">목록</button></a></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
 	</div>
 
 </body>

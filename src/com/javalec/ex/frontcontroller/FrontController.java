@@ -83,7 +83,7 @@ public class FrontController extends HttpServlet {
 			bbsCommand.execute(request, response);
 			viewPage = "list.do";
 
-		} else if (command.equals("/delte.do")) {
+		} else if (command.equals("/delete.do")) {
 			bbsCommand = new BbsDeleteCommand();
 			bbsCommand.execute(request, response);
 			viewPage = "list.do";

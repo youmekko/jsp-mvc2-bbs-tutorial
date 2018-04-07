@@ -23,26 +23,39 @@
 <body>
 
 	<div class="container">
-		<form action="write.do" method="post">
-			<table class="table table-condensed">
-				<tr>
-					<td>이름</td>
-					<td><input type="text" name="bbsName" size="50"></td>
-				</tr>
-				<tr>
-					<td>제목</td>
-					<td><input type="text" name="bbsTitle" size="50"></td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td><textarea name="bbsContent" rows="10"></textarea></td>
-				</tr>
-				<tr>
-					<td colspan="2"><button type="submit" class="btn btn-danger">글 올리기</button> &nbsp;&nbsp;
-						<a href="list.do"><button class="btn btn-primary">목록보기</button></a></td>
-				</tr>
-			</table>
-		</form>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">MVC MODEL2 BBS</div>
+			<div class="panel-body">
+				<form action="write.do" method="post">
+					<table class="table table-condensed">
+						<tr>
+							<td>이름</td>
+							<td><input type="text" name="bbsName" size="50"></td>
+						</tr>
+						<tr>
+							<td>제목</td>
+							<td><input type="text" name="bbsTitle" size="50"></td>
+						</tr>
+						<tr>
+							<td>내용</td>
+							<td><textarea name="bbsContent" rows="10"></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2"><button type="submit"
+									class="btn btn-success">글 올리기</button></td>
+						</tr>
+					</table>
+				</form>
+				<table class="table">
+					<tr>
+						<td><a href="list.do"><button class="btn btn-primary">목록</button></a></td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+
 	</div>
 
 </body>

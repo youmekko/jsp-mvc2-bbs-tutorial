@@ -159,7 +159,7 @@ public class BbsDAO {
 
 		int result = 0;
 
-		String sql = "UPDATE mvc_baord SET bbsName = ?, bbsTitle =?, bbsContent = ? WHERE bbsId = ?";
+		String sql = "UPDATE mvc_board SET bbsName = ?, bbsTitle =?, bbsContent = ? WHERE bbsId = ?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;

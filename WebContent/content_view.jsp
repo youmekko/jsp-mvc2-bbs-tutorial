@@ -23,11 +23,16 @@
 <body>
 
 	<div class="container">
+	
+	<div class="panel panel-default">
+			<div class="panel-heading">MVC MODEL2 BBS</div>
+			<div class="panel-body">
+			
 		<form action="modify.do" method="post">
-			<table style="width=500; cellpadding=0; cellspacing=0; border=1;">
-				<input type="hidden" name="bbsId" value="${content_view.bbsId}">
+			<input type="hidden" name="bbsId" value="${content_view.bbsId}">
+			<table class="table table-condensed">
 				<tr>
-					<td>번</td>
+					<td>번호</td>
 					<td>${content_view.bbsId}</td>
 				</tr>
 				<tr>
@@ -49,13 +54,25 @@
 					<td><textarea rows="10" name="bbsContent">${content_view.bbsContent}</textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="submit" value="submit">
-						&nbsp;&nbsp; <a href="list.do">목록</a> &nbsp;&nbsp; <a
-						href="delete.do?bbsId=${content_view.bbsId}">삭제</a> &nbsp;&nbsp; <a
-						href="reply_view.do?bbsId=${content_view.bbsId}">댓글</a></td>
+					<td colspan="2"><input type="submit" value="수정"
+						class="btn btn-success"></td>
 				</tr>
 			</table>
 		</form>
+
+		<table>
+			<tr>
+
+				<td><a href="list.do"><button class="btn btn-primary">목록</button></a> <a
+					href="delete.do?bbsId=${content_view.bbsId}"><button class="btn btn-danger">삭제</button></a> <a
+					href="reply_view.do?bbsId=${content_view.bbsId}"><button class="btn btn-primary">댓글</button></a></td>
+			</tr>
+		</table>
+		
+		</div>
+		
+		</div>
+
 	</div>
 
 </body>
