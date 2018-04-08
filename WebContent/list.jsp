@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<div class="container">
+	<div class="container" style="margin-top:50px;">
 
 		<div class="panel panel-default">
 			<div class="panel-heading">MVC MODEL2 BBS</div>

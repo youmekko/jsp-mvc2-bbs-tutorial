@@ -16,28 +16,59 @@ public class BbsDAO {
 
 		int result = 0;
 
-		String sql = "INSERT INTO mvc_board (bbsName, bbsTitle,bbsContent, bbsHit, bbsGroup, bbsStep, bbsIndent) values (?, ?, ?, 0, 0, 0, 0)";
+		int maxBbsId = 0;
+
+		String sql1 = "SELECT max(bbsId) AS max FROM mvc_board";
+
+		String sql2 = "INSERT INTO mvc_board (bbsName, bbsTitle,bbsContent, bbsHit, bbsGroup, bbsStep, bbsIndent) values (?, ?, ?, 0, ?, 0, 0)";
 
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
 
 		try {
 			conn = DBConnection.connect();
-			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, bbsName);
-			pstmt.setString(2, bbsTitle);
-			pstmt.setString(3, bbsContent);
+			conn.setAutoCommit(false);
 
-			result = pstmt.executeUpdate();
+			pstmt1 = conn.prepareStatement(sql1);
+
+			ResultSet rs = pstmt1.executeQuery();
+			while (rs.next()) {
+				maxBbsId = rs.getInt("max");
+			}
+			rs.close();
+
+			System.out.println("maxBbsId : " + maxBbsId);
+
+			pstmt2 = conn.prepareStatement(sql2);
+
+			pstmt2.setString(1, bbsName);
+			pstmt2.setString(2, bbsTitle);
+			pstmt2.setString(3, bbsContent);
+			pstmt2.setInt(4, maxBbsId);
+
+			result = pstmt2.executeUpdate();
+
+			conn.commit();
+
 		} catch (SQLException se) {
 			se.printStackTrace();
+
+			try {
+				conn.rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (pstmt != null)
-					pstmt.close();
+				if (pstmt1 != null || pstmt2 != null)
+					pstmt1.close();
+				pstmt2.close();
 			} catch (SQLException se) {
 			}
 			try {
@@ -288,39 +319,66 @@ public class BbsDAO {
 
 	}
 
-	public int reply(String bbsName, String bbsTitle, String bbsContent, String bbsGroup, String bbsStep,
+	public int reply(String bbsId, String bbsName, String bbsTitle, String bbsContent, String bbsGroup, String bbsStep,
 			String bbsIndent) {
 
 		this.replyShape(bbsGroup, bbsStep);
 
 		int result = 0;
 
-		String sql = "INSERT INTO mvc_board(bbsName, bbsTitle, bbsContent, bbsGruop, bbsStep, bbsIndent) VALUES (?, ?, ?, ?, ?, ?)";
+		int bbsIdNextVal = 0;
+
+		String sql1 = "SELECT MAX(bbsId) AS max FROM mvc_board";
+
+		String sql2 = "INSERT INTO mvc_board(bbsId, bbsName, bbsTitle, bbsContent, bbsGroup, bbsStep, bbsIndent) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
 
 		try {
 
 			conn = DBConnection.connect();
-			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, bbsTitle);
-			pstmt.setString(2, bbsContent);
-			pstmt.setInt(3, Integer.parseInt(bbsGroup));
-			pstmt.setInt(4, Integer.parseInt(bbsStep) + 1);
-			pstmt.setInt(5, Integer.parseInt(bbsIndent) + 1);
+			conn.setAutoCommit(false);
 
-			result = pstmt.executeUpdate();
+			pstmt1 = conn.prepareStatement(sql1);
+
+			ResultSet rs = pstmt1.executeQuery();
+
+			while (rs.next()) {
+				bbsIdNextVal = rs.getInt("max") + 1;
+			}
+
+			pstmt2 = conn.prepareStatement(sql2);
+
+			pstmt2.setInt(1, bbsIdNextVal);
+			pstmt2.setString(2, bbsName);
+			pstmt2.setString(3, bbsTitle);
+			pstmt2.setString(4, bbsContent);
+			pstmt2.setInt(5, Integer.parseInt(bbsGroup));
+			pstmt2.setInt(6, Integer.parseInt(bbsStep) + 1);
+			pstmt2.setInt(7, Integer.parseInt(bbsIndent) + 1);
+
+			result = pstmt2.executeUpdate();
+
+			conn.commit();
 
 		} catch (SQLException se) {
 			se.printStackTrace();
+
+			try {
+				conn.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (pstmt != null)
-					pstmt.close();
+				if (pstmt1 != null || pstmt2 != null)
+					pstmt1.close();
+				pstmt2.close();
 			} catch (SQLException se) {
 			}
 			try {
@@ -347,6 +405,9 @@ public class BbsDAO {
 			conn = DBConnection.connect();
 			pstmt = conn.prepareStatement(sql);
 
+			System.out.println("bbsGroup : " + bbsGroup);
+			System.out.println("bbsStep : " + bbsStep);
+
 			pstmt.setInt(1, Integer.parseInt(bbsGroup));
 			pstmt.setInt(2, Integer.parseInt(bbsStep));
 
@@ -368,6 +429,7 @@ public class BbsDAO {
 				se.printStackTrace();
 			}
 		}
+
 		return result;
 	}
 
@@ -375,7 +437,7 @@ public class BbsDAO {
 
 		int result = 0;
 
-		String sql = "UPDATE mvc_board SET bbsHit + 1 WHERE bbsId = ?";
+		String sql = "UPDATE mvc_board SET bbsHit = bbsHit + 1 WHERE bbsId = ?";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;

@@ -11,16 +11,16 @@ public class BbsReplyCommand implements BbsCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-//		String bbsId = request.getParameter("bbsId");
+		String bbsId = request.getParameter("bbsId");
         String bbsName = request.getParameter("bbsName");
         String bbsTitle = request.getParameter("bbsTitle");
         String bbsContent = request.getParameter("bbsContent");
         String bbsGroup = request.getParameter("bbsGroup");
         String bbsStep = request.getParameter("bbsStep");
-        String bbsIndent = request.getParameter("bbsIndet");
+        String bbsIndent = request.getParameter("bbsIndent");
         
         BbsDAO dao = new BbsDAO();
-        dao.reply(bbsName, bbsTitle, bbsContent, bbsGroup, bbsStep, bbsIndent);
+        dao.reply(bbsId, bbsName, bbsTitle, bbsContent, bbsGroup, bbsStep, bbsIndent);
 
 	}
 

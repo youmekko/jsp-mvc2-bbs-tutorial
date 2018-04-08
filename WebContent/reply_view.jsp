@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<div class="container">
+	<div class="container" style="margin-top:50px;"> 
 
 		<div class="panel panel-default">
 			<div class="panel-heading">MVC MODEL2 BBS</div>
@@ -31,7 +31,7 @@
 
 				<form action="reply.do" method="post">
 					<input type="hidden" name="bbsId" value="${reply_view.bbsId}">
-					<input type="hidden" name="bbbsGroup"
+					<input type="hidden" name="bbsGroup"
 						value="${reply_view.bbsGroup}"> <input type="hidden"
 						name="bbsStep" value="${reply_view.bbsStep}"> <input
 						type="hidden" name="bbsIndent" value="${reply_view.bbsIndent}">
@@ -56,7 +56,7 @@
 						</tr>
 						<tr>
 							<td>내용</td>
-							<td><textarea rows="10" name="bContent">${reply_view.bbsContent}</textarea></td>
+							<td><textarea rows="10" name="bbsContent">${reply_view.bbsContent}</textarea></td>
 						</tr>
 						<tr>
 							<td colspan="2"><button type="submit"
